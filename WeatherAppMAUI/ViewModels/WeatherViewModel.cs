@@ -12,9 +12,7 @@ namespace WeatherAppMAUI.ViewModels
         public WeatherViewModel(IWeatherServices weatherServices)
         {
             _weatherServices = weatherServices;
-            SearchCommand = new Command(async () => await PerformSearchCommand());
-
-           
+            SearchCommand = new Command(async () => await PerformSearchCommand()); 
         }
 
        
