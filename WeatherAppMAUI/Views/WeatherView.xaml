@@ -1,8 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WeatherAppMAUI.WeatherView">
+             x:Class="WeatherAppMAUI.WeatherView"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#002854">
 
-    <Label Text="Aquí estará la aplicación de clima"/>
+    <VerticalStackLayout 
+            Spacing="100"
+            Padding="40,0"
+            VerticalOptions="Center"
+            Margin="0,-300,0,0">
+        <Image 
+            Source="weatherapp.png"  
+            WidthRequest="250"/>
+
+        <HorizontalStackLayout>
+            <Entry 
+            Placeholder="ciudad" 
+            Opacity="10"
+            Text="{Binding CityName}"
+            WidthRequest="200"
+            Margin="0,0,10,0"/>
+
+            <Button 
+                Text="Buscar"
+                WidthRequest="80"
+                CornerRadius="20"
+                BackgroundColor="White"
+                TextColor="#33415c"
+                Command="{Binding SearchCommand}"/>
+        </HorizontalStackLayout>
+
+        
+        
+        
+    </VerticalStackLayout>
+
+    
 
 </ContentPage>
