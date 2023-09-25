@@ -5,11 +5,11 @@ namespace WeatherAppMAUI.Infrastructure.Services.Weathers
 {
     public class WeatherResponse
     {
-  
-        public int timezone { get; set; }
-        public int id { get; set; }
-        public string name { get; set; }
-        public int cod { get; set; }
+         public WeatherDto[] Weather { get; set; }
+         public MainDto main { get; set; }
+         public WindDto wind { get; set; }
+         public string name { get; set; }
+        
     }
 
    

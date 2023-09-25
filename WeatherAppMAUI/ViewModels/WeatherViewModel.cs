@@ -15,7 +15,7 @@ namespace WeatherAppMAUI.ViewModels
 
         private async void LoadData() 
         {
-            var response = await _weatherServices.GetWeathers(38.98626, -3.92907);
+            var response = await _weatherServices.GetWeathers("ciudad real");
         }
     }
 }

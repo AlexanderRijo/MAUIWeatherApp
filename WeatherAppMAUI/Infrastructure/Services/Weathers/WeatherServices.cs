@@ -7,11 +7,11 @@ namespace WeatherAppMAUI.Infrastructure.Services.Weathers
     {
         private const string SearchWeathersEndpoint = "https://api.openweathermap.org/data/2.5/weather?q={0}&appid=23089bd900735acc7f2898643aa20c65";
 
-        public async Task<WeatherResponse> GetWeathers(double latitude, double longitude) 
+        public async Task<WeatherResponse> GetWeathers(string weatherCity) 
         {
             WeatherResponse result = new WeatherResponse();
 
-            var url = string.Format(SearchWeathersEndpoint, latitude, longitude);
+            var url = string.Format(SearchWeathersEndpoint, weatherCity);
 
             using (HttpClient client = new HttpClient()) 
             {

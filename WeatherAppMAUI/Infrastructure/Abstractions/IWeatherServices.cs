@@ -4,6 +4,6 @@ namespace WeatherAppMAUI.Infrastructure.Abstractions
 {
     public interface IWeatherServices
     {
-        Task<WeatherResponse> GetWeathers(double latitude, double longitude);
+        Task<WeatherResponse> GetWeathers(string weatherCity);
     }
 }
