@@ -7,6 +7,6 @@ public partial class AppShell : Shell
 	public AppShell()
 	{
 		InitializeComponent();
-		Routing.RegisterRoute(nameof(WeatherDetailView), typeof(WeatherDetailView));
+		Routing.RegisterRoute("WeatherDetail", typeof(WeatherDetailView));
 	}
 }

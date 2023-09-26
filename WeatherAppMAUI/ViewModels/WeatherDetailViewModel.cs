@@ -1,23 +1,39 @@
-﻿using WeatherAppMAUI.Infrastructure.Mappers;
-using WeatherAppMAUI.Models;
+﻿using WeatherAppMAUI.Infrastructure.Abstractions;
+using WeatherAppMAUI.Infrastructure.Mappers;
 using WeatherAppMAUI.ViewModels.Base;
 
 namespace WeatherAppMAUI.ViewModels
 {
+    [QueryProperty("CityName", "name")]
     public class WeatherDetailViewModel : BaseViewModel
     {
-        private WeatherCity _weatherCity;
+        private readonly IWeatherServices _weatherServices;
+        private string _cityName;
 
-        public WeatherDetailViewModel()
+        public WeatherDetailViewModel(IWeatherServices weatherServices)
         {
-         
+            _weatherServices = weatherServices;
+            LoadData();
         }
 
-        public WeatherCity WeatherCity 
+        public string CityName
         {
-            get => _weatherCity;
-            set => SetProperty(ref _weatherCity, value);
+            get => CityName;
+            set
+            {
+                CityName = value;
+                OnPropertyChanged();
+            }
+
         }
+
+        private async void LoadData()
+        {
+            var response = await _weatherServices.GetWeathers(CityName);
+            var results = BackendToModelMapper.GetWeatherCities(response);
+        }
+
+
 
     }
 }

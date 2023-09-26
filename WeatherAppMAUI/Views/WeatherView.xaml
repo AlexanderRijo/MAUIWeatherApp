@@ -20,13 +20,16 @@
             Opacity="10"
             Text="{Binding CityName}"
             WidthRequest="200"
-            Margin="0,0,10,0"/>
+            Margin="0,0,10,0"
+            FontSize="20"
+            TextColor="White"/>
 
             <Button 
                 Text="Buscar"
-                Opacity="10"
-                WidthRequest="80"
-                CornerRadius="20"
+                Opacity="0.9"
+                WidthRequest="75"
+                HeightRequest="40"
+                CornerRadius="10"
                 BackgroundColor="White"
                 TextColor="#33415c"
                 Command="{Binding SearchCommand}"/>

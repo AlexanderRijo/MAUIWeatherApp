@@ -1,20 +1,14 @@
 ﻿using System.Windows.Input;
-using WeatherAppMAUI.Infrastructure.Abstractions;
-using WeatherAppMAUI.Infrastructure.Mappers;
-using WeatherAppMAUI.Infrastructure.Services.Weathers;
 using WeatherAppMAUI.ViewModels.Base;
-using WeatherAppMAUI.Views;
 
 namespace WeatherAppMAUI.ViewModels
 {
     public class WeatherViewModel : BaseViewModel
     {
-        private readonly IWeatherServices _weatherServices;
         private string _cityName;
 
-        public WeatherViewModel(IWeatherServices weatherServices)
+        public WeatherViewModel()
         {
-            _weatherServices = weatherServices;
             SearchCommand = new Command(async () => await PerformSearchCommand()); 
         }
 
@@ -30,9 +24,7 @@ namespace WeatherAppMAUI.ViewModels
       
         private async Task PerformSearchCommand() 
         {
-            var response = await _weatherServices.GetWeathers(CityName);
-            var results = BackendToModelMapper.GetWeatherCities(response);
-            await Shell.Current.GoToAsync($"{nameof(WeatherDetailView)}");
+            await Shell.Current.GoToAsync($"WeatherDetail?name={CityName}");
         }
 
        
