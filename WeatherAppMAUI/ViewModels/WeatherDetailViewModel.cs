@@ -1,4 +1,5 @@
-﻿using WeatherAppMAUI.Models;
+﻿using WeatherAppMAUI.Infrastructure.Mappers;
+using WeatherAppMAUI.Models;
 using WeatherAppMAUI.ViewModels.Base;
 
 namespace WeatherAppMAUI.ViewModels
@@ -9,7 +10,7 @@ namespace WeatherAppMAUI.ViewModels
 
         public WeatherDetailViewModel()
         {
-            _weatherCity = new WeatherCity();
+         
         }
 
         public WeatherCity WeatherCity 
@@ -17,8 +18,6 @@ namespace WeatherAppMAUI.ViewModels
             get => _weatherCity;
             set => SetProperty(ref _weatherCity, value);
         }
-
-        
 
     }
 }

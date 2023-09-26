@@ -16,10 +16,10 @@ namespace WeatherAppMAUI.Infrastructure.Mappers
                     Main = c.main,
                     Description = c.description,
                     Icon = c.icon,
-                }),
+                }).ToArray(),
                 Main = Gettemp(source.main),
                 Wind = Getwind(source.wind),
-                Name = source.name
+                Name = source.name,
             };
 
             return result;

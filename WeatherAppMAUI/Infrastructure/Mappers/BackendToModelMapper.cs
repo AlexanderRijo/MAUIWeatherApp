@@ -5,16 +5,16 @@ namespace WeatherAppMAUI.Infrastructure.Mappers
 {
     public class BackendToModelMapper
     {
-        public static IEnumerable<WeatherCity> GetWeatherCities(IEnumerable<WeatherResponse> city) 
+        public static WeatherCity GetWeatherCities(WeatherResponse city) 
         {
-            if (city is null || !city.Any()) 
+            if (city == null ) 
             {
-                return Enumerable.Empty<WeatherCity>();
+                return null;
             
             }
 
             var mapper = new WeatherMapper();
-            return city.Select(r => mapper.Map(r));
+            return mapper.Map(city);
 
         }
     }
