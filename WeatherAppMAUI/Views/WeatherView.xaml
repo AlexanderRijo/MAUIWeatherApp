@@ -30,12 +30,5 @@
                 TextColor="#33415c"
                 Command="{Binding SearchCommand}"/>
         </HorizontalStackLayout>
-
-        
-        
-        
     </VerticalStackLayout>
-
-    
-
 </ContentPage>

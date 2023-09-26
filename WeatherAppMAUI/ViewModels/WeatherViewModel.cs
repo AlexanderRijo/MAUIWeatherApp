@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using WeatherAppMAUI.Infrastructure.Abstractions;
 using WeatherAppMAUI.ViewModels.Base;
+using WeatherAppMAUI.Views;
 
 namespace WeatherAppMAUI.ViewModels
 {
@@ -28,6 +29,7 @@ namespace WeatherAppMAUI.ViewModels
         private async Task PerformSearchCommand() 
         {
             var response = await _weatherServices.GetWeathers(CityName);
+            await Shell.Current.GoToAsync($"{nameof(WeatherDetailView)}");
         }
 
        

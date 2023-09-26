@@ -1,5 +1,6 @@
 ﻿using WeatherAppMAUI.Infrastructure.Mappers.Base;
 using WeatherAppMAUI.Infrastructure.Services.Weathers;
+using WeatherAppMAUI.Infrastructure.Services.Weathers.Models;
 using WeatherAppMAUI.Models;
 
 namespace WeatherAppMAUI.Infrastructure.Mappers
@@ -15,27 +16,35 @@ namespace WeatherAppMAUI.Infrastructure.Mappers
                     Main = c.main,
                     Description = c.description,
                     Icon = c.icon,
-                }).ToArray(),
-
-                Main = new Main
-                {
-                   Temp = source.main.temp,
-                   Feels_like = source.main.feels_like,
-                   Temp_min = source.main.temp_min,
-                   Temp_max = source.main.temp_max,
-                   Humidity = source.main.humidity
-
-                }, 
-
-                Wind = new Wind 
-                {
-                    Speed = source.wind.speed
-                },
-
+                }),
+                Main = Gettemp(source.main),
+                Wind = Getwind(source.wind),
                 Name = source.name
             };
 
             return result;
+        }
+
+        private static Main Gettemp (MainDto main) 
+        {
+            return new Main
+            {
+                Temp = main.temp,
+                Feels_like = main.feels_like,
+                Temp_min = main.temp_min,
+                Temp_max = main.temp_max,  
+                Humidity = main.humidity,
+
+            };
+        }
+
+        private static Wind Getwind (WindDto wind) 
+        {
+            return new Wind
+            {
+                Speed = wind.speed,
+            };
+        
         }
     }
 }
