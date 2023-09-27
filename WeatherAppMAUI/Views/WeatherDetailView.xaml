@@ -5,10 +5,6 @@
              Title="WeatherDetailView">
     
     <VerticalStackLayout>
-        <Label 
-            Text="{Binding WeatherCity.Name}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            TextColor="Black"/>
+      
     </VerticalStackLayout>
 </ContentPage>

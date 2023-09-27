@@ -34,5 +34,11 @@
                 TextColor="#33415c"
                 Command="{Binding SearchCommand}"/>
         </HorizontalStackLayout>
+
+        <Label 
+            Text="{Binding WeatherCity.Name}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            TextColor="Black"/>
     </VerticalStackLayout>
 </ContentPage>

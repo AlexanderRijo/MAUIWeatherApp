@@ -1,14 +1,21 @@
-﻿using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Windows.Input;
+using WeatherAppMAUI.Infrastructure.Abstractions;
+using WeatherAppMAUI.Infrastructure.Mappers;
+using WeatherAppMAUI.Models;
 using WeatherAppMAUI.ViewModels.Base;
 
 namespace WeatherAppMAUI.ViewModels
 {
-    public class WeatherViewModel : BaseViewModel
+    public class WeatherViewModel : BaseViewModel, INotifyPropertyChanged
     {
+        private readonly IWeatherServices _weatherServices;
         private string _cityName;
+        private WeatherCity _weatherCity;
 
-        public WeatherViewModel()
+        public WeatherViewModel(IWeatherServices weatherServices)
         {
+            _weatherServices = weatherServices;
             SearchCommand = new Command(async () => await PerformSearchCommand()); 
         }
 
@@ -19,12 +26,28 @@ namespace WeatherAppMAUI.ViewModels
             set => SetProperty(ref _cityName, value);
         }
 
+        public WeatherCity WeatherCity
+        {
+            get => _weatherCity;
+            set
+            {
+                if (_weatherCity != value)
+                {
+                    _weatherCity = value;
+                    OnPropertyChanged(nameof(WeatherCity));
+                }
+            }
+
+        }
+
         public ICommand SearchCommand { get; }
 
       
         private async Task PerformSearchCommand() 
         {
-            await Shell.Current.GoToAsync($"WeatherDetail?name={CityName}");
+            var response = await _weatherServices.GetWeathers(CityName);
+            var results = BackendToModelMapper.GetWeatherCities(response);
+            WeatherCity = results;
         }
 
        
