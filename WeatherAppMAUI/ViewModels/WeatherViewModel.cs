@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using Prism.Navigation;
+using System.Windows.Input;
 using WeatherAppMAUI.ViewModels.Base;
 
 namespace WeatherAppMAUI.ViewModels
@@ -6,12 +7,13 @@ namespace WeatherAppMAUI.ViewModels
     public class WeatherViewModel : BaseViewModel
     {
         private string _cityName;
+        private readonly INavigationService _navigationService;
 
-        public WeatherViewModel()
+        public WeatherViewModel(INavigationService navigationService)
         {
-            SearchCommand = new Command(async () => await PerformSearchCommand()); 
+            _navigationService = navigationService;
+            SearchCommand = new Command(async () => await NavigateToWeatherDetailView()); 
         }
-
        
         public string CityName 
         { 
@@ -22,9 +24,9 @@ namespace WeatherAppMAUI.ViewModels
         public ICommand SearchCommand { get; }
 
       
-        private async Task PerformSearchCommand() 
+        private async Task NavigateToWeatherDetailView() 
         {
-            await Shell.Current.GoToAsync($"WeatherDetail?name={CityName}");
+            await _navigationService.NavigateAsync("WeatherDetailView");
         }
 
        

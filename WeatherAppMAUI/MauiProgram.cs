@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using WeatherAppMAUI.Infrastructure.Abstractions;
+﻿using WeatherAppMAUI.Infrastructure.Abstractions;
 using WeatherAppMAUI.Infrastructure.Services.Weathers;
 using WeatherAppMAUI.ViewModels;
 using WeatherAppMAUI.Views;
@@ -13,24 +12,36 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
+
+            .UsePrism(prism =>
+            {
+                //Registro de páginas 
+                prism.RegisterTypes(types =>
+                {
+                    types.RegisterForNavigation<WeatherView, WeatherViewModel>();
+                    types.RegisterForNavigation<WeatherDetailView, WeatherDetailViewModel>();
+                              
+                })
+
+                //Inyección de dependencias 
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton<IWeatherServices, WeatherServices>();
+                })
+
+                // Página de inicio de la aplicación 
+                .OnAppStart(async (start) =>
+                {
+                    await start.NavigateAsync("WeatherView");
+                });
+
+            })
+
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-
-		// Registro de vistas y viewModels
-		builder.Services.AddSingleton<WeatherView>();
-        builder.Services.AddSingleton<WeatherViewModel>();
-		builder.Services.AddSingleton<WeatherDetailView>();
-		builder.Services.AddSingleton<WeatherDetailViewModel>();
-
-		// Inyección de dependencias
-		builder.Services.AddSingleton<IWeatherServices, WeatherServices>();
-
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
 
 		return builder.Build();
 	}
