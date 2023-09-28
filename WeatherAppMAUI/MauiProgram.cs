@@ -2,7 +2,6 @@
 using WeatherAppMAUI.Infrastructure.Abstractions;
 using WeatherAppMAUI.Infrastructure.Services.Weathers;
 using WeatherAppMAUI.ViewModels;
-using WeatherAppMAUI.Views;
 
 namespace WeatherAppMAUI;
 
@@ -17,13 +16,12 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+				fonts.AddFont("CONSOLAB.TTF", "ConsolaB");
 			});
 
 		// Registro de vistas y viewModels
 		builder.Services.AddSingleton<WeatherView>();
         builder.Services.AddSingleton<WeatherViewModel>();
-		builder.Services.AddSingleton<WeatherDetailView>();
-		builder.Services.AddSingleton<WeatherDetailViewModel>();
 
 		// Inyección de dependencias
 		builder.Services.AddSingleton<IWeatherServices, WeatherServices>();

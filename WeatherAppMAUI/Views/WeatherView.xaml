@@ -6,39 +6,164 @@
              BackgroundColor="#002854">
 
     <VerticalStackLayout 
-            Spacing="100"
-            Padding="40,0"
-            VerticalOptions="Center"
-            Margin="0,-300,0,0">
+            Spacing="15"
+            Padding="20,60"
+            VerticalOptions="Start">
+        
         <Image 
             Source="weatherapp.png"  
-            WidthRequest="250"/>
+            WidthRequest="80"/>
 
-        <HorizontalStackLayout>
-            <Entry 
-            Placeholder="ciudad" 
-            Opacity="10"
-            Text="{Binding CityName}"
-            WidthRequest="200"
-            Margin="0,0,10,0"
-            FontSize="20"
-            TextColor="White"/>
-
-            <Button 
-                Text="Buscar"
-                Opacity="0.9"
-                WidthRequest="75"
-                HeightRequest="40"
-                CornerRadius="10"
+        <SearchBar
+                SearchCommand="{Binding SearchCommand}"
+                Text="{Binding CityName}"
+                FontFamily="ConsolaB"
                 BackgroundColor="White"
-                TextColor="#33415c"
-                Command="{Binding SearchCommand}"/>
-        </HorizontalStackLayout>
+                TextColor="Black"
+                Opacity="10"
+            FontSize="20"/>
 
-        <Label 
-            Text="{Binding WeatherCity.Name}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            TextColor="Black"/>
+        <Frame
+            IsVisible="{Binding IsFrameVisible}"
+            BackgroundColor="#001233"
+            BorderColor="#001233"
+            VerticalOptions="FillAndExpand">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Column="0">
+
+                    <Label 
+                        Text="{Binding WeatherCity.Name}"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        TextColor="White"
+                        FontFamily="ConsolaB"
+                        FontSize="20"
+                        Margin="-40,0,0,0"/>
+
+                    <Label
+                        Text="{Binding WeatherCity.Main.Temp, StringFormat='{0:F} °C'}"
+                        FontSize="30"
+                        FontFamily="ConsolaB"
+                        TextColor="White"/>
+
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString >
+                                <Span 
+                                    Text="   Min" 
+                                    TextColor="White"
+                                    FontFamily="ConsolaB"
+                                    FontSize="15"/>
+                                <Span 
+                                    Text="            " />
+                                <Span 
+                                    Text="Max" 
+                                    TextColor="White"
+                                    FontFamily="ConsolaB"
+                                    FontSize="15"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString >
+                                <Span 
+                                    Text="{Binding WeatherCity.Main.Temp_min, StringFormat='{0:F} °C'}" 
+                                    TextColor="White"
+                                    FontFamily="ConsolaB"
+                                    FontSize="15"/>
+                                <Span 
+                                    Text="   " />
+                                <Span 
+                                    Text="{Binding WeatherCity.Main.Temp_max, StringFormat='{0:F} °C'}" 
+                                    TextColor="White"
+                                    FontFamily="ConsolaB"
+                                    FontSize="15"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+
+                    <Label
+                        Text="Feels Like" 
+                        FontFamily="ConsolaB"
+                        TextColor="White"
+                        FontSize="18"
+                        Margin="0,15,0,0"/>
+
+
+                    <Label
+                        Text="{Binding WeatherCity.Main.Feels_like, StringFormat='{0:F} °C'}"
+                        FontSize="25"
+                        FontFamily="ConsolaB"
+                        TextColor="White"/>
+
+
+                    <Label
+                        Text="Humidity" 
+                        FontFamily="ConsolaB"
+                        TextColor="White"
+                        FontSize="18"
+                        Margin="0,15,0,0"/>
+
+
+                    <Label
+                        Text="{Binding WeatherCity.Main.Humidity}"
+                        FontSize="25"
+                        FontFamily="ConsolaB"
+                        TextColor="White"/>
+
+
+                    <Label
+                        Text="Wind" 
+                        FontFamily="ConsolaB"
+                        TextColor="White"
+                        FontSize="18"
+                        Margin="0,15,0,0"/>
+
+
+                    <Label
+                        Text="{Binding WeatherCity.Wind.Speed}"
+                        FontSize="25"
+                        FontFamily="ConsolaB"
+                        TextColor="White"/>
+                </StackLayout>
+
+                <StackLayout Grid.Column="1">
+
+                    <Label
+                Text="{Binding WeatherCity.Weather[0].Main}"
+                Padding="0,0,0,0"
+                FontFamily="ConsolaB"
+                TextColor="White"
+                FontSize="20"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"/>
+
+                    <Image
+                Source="{Binding IconSource}"
+                Margin="0,-45,0,-40"
+                HeightRequest="200"
+                WidthRequest="200"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"/>
+
+                    <Label
+                Text="{Binding WeatherCity.Weather[0].Description}"
+                FontFamily="ConsolaB"
+                TextColor="White"
+                FontSize="16"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

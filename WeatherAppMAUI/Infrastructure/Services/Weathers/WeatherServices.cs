@@ -5,7 +5,7 @@ namespace WeatherAppMAUI.Infrastructure.Services.Weathers
 {
     public class WeatherServices : IWeatherServices
     {
-        private const string SearchWeathersEndpoint = "https://api.openweathermap.org/data/2.5/weather?q={0}&appid=23089bd900735acc7f2898643aa20c65";
+        private const string SearchWeathersEndpoint = "https://api.openweathermap.org/data/2.5/weather?q={0}&appid=23089bd900735acc7f2898643aa20c65&lang=es&units=metric";
 
         public async Task<WeatherResponse> GetWeathers(string weatherCity) 
         {

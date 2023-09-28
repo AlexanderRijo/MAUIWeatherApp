@@ -11,12 +11,14 @@ namespace WeatherAppMAUI.ViewModels
     {
         private readonly IWeatherServices _weatherServices;
         private string _cityName;
+        private UriImageSource _iconSource;
         private WeatherCity _weatherCity;
+        private bool isFrameVisible;
 
         public WeatherViewModel(IWeatherServices weatherServices)
         {
             _weatherServices = weatherServices;
-            SearchCommand = new Command(async () => await PerformSearchCommand()); 
+            SearchCommand = new Command(async () => await PerformSearchCommand());
         }
 
        
@@ -25,6 +27,13 @@ namespace WeatherAppMAUI.ViewModels
             get => _cityName;
             set => SetProperty(ref _cityName, value);
         }
+
+        public UriImageSource IconSource 
+        { 
+            get => _iconSource;
+            set => SetProperty( ref _iconSource, value);
+        }
+
 
         public WeatherCity WeatherCity
         {
@@ -40,6 +49,19 @@ namespace WeatherAppMAUI.ViewModels
 
         }
 
+        public bool IsFrameVisible
+        {
+            get { return isFrameVisible; }
+            set
+            {
+                if (isFrameVisible != value)
+                {
+                    isFrameVisible = value;
+                    OnPropertyChanged(nameof(IsFrameVisible));
+                }
+            }
+        }
+
         public ICommand SearchCommand { get; }
 
       
@@ -48,8 +70,29 @@ namespace WeatherAppMAUI.ViewModels
             var response = await _weatherServices.GetWeathers(CityName);
             var results = BackendToModelMapper.GetWeatherCities(response);
             WeatherCity = results;
+            IconSource = GetIcon();
+            IsFrameVisible = true;
+
+
         }
 
-       
+        // url: https://openweathermap.org/img/wn/10d@2x.png
+
+        private UriImageSource GetIcon()
+        {
+            string imageUrl = "https://openweathermap.org/img/wn/" + WeatherCity.Weather[0].Icon + "@2x.png";
+
+             UriImageSource IconSource  = new UriImageSource
+            {
+                Uri = new Uri(imageUrl),
+                CachingEnabled = true,
+                CacheValidity = TimeSpan.FromDays(1)
+
+            };
+
+            return IconSource;
+        }
+
+
     }
 }

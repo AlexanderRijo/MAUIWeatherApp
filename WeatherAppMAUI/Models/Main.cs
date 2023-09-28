@@ -7,5 +7,7 @@
         public string Temp_min { get; set; }
         public string Temp_max { get; set; }
         public string Humidity { get; set; }
+
+      
     }
 }
